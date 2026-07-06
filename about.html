@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>わたしについて | ふかお</title>
+<link rel="icon" type="image/png" href="img/fukao_profile.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#12233f;
+    --navy-deep:#0b1830;
+    --blue:#e0631f;
+    --blue-light:#fdece0;
+    --oshi:#e98fae;
+    --oshi-bg:#fdf1f6;
+    --text:#22293a;
+    --text-soft:#5a6478;
+    --line:#e3e7ee;
+    --bg:#ffffff;
+    --bg-alt:#f6f8fb;
+    --radius:14px;
+    --maxw:1080px;
+    --pop-orange:#ff7a33;
+    --pop-orange-dark:#e0631f;
+    --pop-sky:#ffa057;
+    --font-display:"M PLUS Rounded 1c","Hiragino Sans",sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  @keyframes popPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.6);opacity:.6;}}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+
+  body{
+    margin:0;
+    font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  section{padding:88px 24px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;}
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    letter-spacing:.14em;
+    color:var(--blue);
+    font-weight:700;
+    margin-bottom:14px;
+    text-transform:uppercase;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--pop-orange);
+    animation:popPulse 1.8s ease-in-out infinite;
+  }
+  h2.section-title{
+    font-family:var(--font-display);
+    font-size:clamp(26px,3.4vw,34px);
+    font-weight:800;
+    margin:0 0 16px;
+    line-height:1.5;
+    letter-spacing:.01em;
+  }
+  .section-lead{
+    color:var(--text-soft);
+    font-size:16px;
+    max-width:640px;
+    margin:0 0 48px;
+  }
+
+  /* ---------- Header / Nav ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:.02em;}
+  .logo span{color:var(--pop-orange);}
+  nav.links{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.links a{color:var(--text-soft);transition:color .2s;position:relative;padding-bottom:4px;}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--pop-orange);transition:width .25s ease;}
+  nav.links a:hover{color:var(--blue);}
+  nav.links a:hover::after{width:100%;}
+  nav.links a.is-active{color:var(--blue);}
+  nav.links a.is-active::after{width:100%;}
+  .nav-cta{
+    background:var(--blue);
+    color:#fff;
+    padding:9px 20px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    white-space:nowrap;
+    transition:transform .2s ease,background .2s ease;
+    display:inline-block;
+  }
+  .nav-cta:hover{background:var(--pop-orange);transform:translateY(-2px) rotate(-1deg);}
+  .menu-btn{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--blue);}
+
+  /* profile photo */
+  .avatar-placeholder{
+    width:70%;
+    max-width:220px;
+    aspect-ratio:1/1;
+    border-radius:50%;
+    background:var(--bg-alt);
+    border:1px solid var(--line);
+    overflow:hidden;
+    margin:0 auto 18px;
+    box-shadow:0 16px 30px rgba(18,35,63,.1);
+  }
+  .avatar-placeholder img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  /* ---------- About page ---------- */
+  .about-page{padding-top:140px;}
+  .about-grid{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:56px;
+    align-items:center;
+  }
+  .about-photo{text-align:center;}
+  .about-photo .avatar-placeholder{margin:0 auto;}
+  .about-text .eyebrow{margin-bottom:14px;}
+  .about-name{
+    font-family:var(--font-display);
+    font-size:21px;
+    font-weight:800;
+    color:var(--text);
+    margin:2px 0 16px;
+  }
+  .about-name span{
+    font-size:14px;
+    font-weight:600;
+    color:var(--text-soft);
+    margin-left:8px;
+  }
+  .about-hobby{
+    margin:16px 0 0;
+    font-size:14.5px;
+    color:var(--text-soft);
+  }
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--text-soft);
+    margin-bottom:28px;
+  }
+  .back-link:hover{color:var(--blue);}
+
+  footer{
+    text-align:center;
+    padding:32px 24px;
+    font-size:12px;
+    color:var(--text-soft);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;gap:28px;}
+    nav.links{display:none;}
+    .menu-btn{display:block;}
+    .nav-cta{display:none;}
+  }
+  @media (max-width:480px){
+    section{padding:64px 18px;}
+    .about-page{padding-top:110px;}
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    header{position:static;}
+    .menu-btn,.nav-cta{display:none !important;}
+    section{padding:28px 0;break-inside:avoid;}
+    *{animation:none !important;transition:none !important;}
+    .reveal{opacity:1 !important;transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a class="logo" href="portfolio.html">ふかお<span>.</span></a>
+    <nav class="links">
+      <a href="about.html" class="is-active">わたしについて</a>
+      <a href="portfolio.html#services">できること</a>
+      <a href="portfolio.html#works">実績</a>
+      <a href="portfolio.html#strengths">進め方</a>
+      <a href="portfolio.html#contact">Contact</a>
+    </nav>
+    <a href="portfolio.html#contact" class="nav-cta">相談してみる</a>
+    <button class="menu-btn" aria-label="menu">☰</button>
+  </div>
+</header>
+
+<section class="about-page">
+  <div class="wrap">
+    <a href="portfolio.html" class="back-link">← トップページに戻る</a>
+    <div class="about-grid">
+      <div class="about-photo">
+        <div class="avatar-placeholder"><img src="img/fukao_profile.png" alt="ふかお プロフィールアイコン"></div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">PROFILE</span>
+        <p class="about-name">ふかお<span>(ふかだ こうせつ)</span></p>
+        <p class="section-lead" style="margin-bottom:16px;">
+          2002年生まれ、東京都出身のデザイナー。<br>幼少期はタイとマレーシアに住んでいました。
+        </p>
+        <p style="color:var(--text-soft);font-size:14.5px;line-height:1.9;margin:0 0 16px;">
+          デザインの専門学校を卒業後、EC支援事業を行う企業にて、LP・バナー・チラシ等のデザインを担当。並行してSNS運用代行にも携わり、顧客対応・ディレクション・配信用画像の制作までを一気通貫で担当してきました。現在はフリーランスとして活動しています。
+        </p>
+        <p class="about-hobby">趣味はアイドル・水族館・ヒロアカ・ミセス…推しが多くて困ります(幸)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 ふかお. All rights reserved.
+</footer>
+
+<script>
+  // モバイルメニュー簡易トグル
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.querySelector('nav.links');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.style.display === 'flex';
+      navLinks.style.cssText = isOpen
+        ? ''
+        : 'display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:#fff;padding:20px 24px;border-bottom:1px solid #e3e7ee;';
+    });
+  }
+
+  // スクロールでふわっと表示
+  const revealTargets = document.querySelectorAll('.about-photo, .about-text');
+  revealTargets.forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i % 2) * 0.1 + 's';
+  });
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealTargets.forEach((el) => io.observe(el));
+  } else {
+    revealTargets.forEach((el) => el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
